@@ -1,0 +1,22 @@
+# Portfolio media files (hosted on R2)
+Portfolio-Content/
+
+# Large media files
+*.mp4
+*.mov
+*.avi
+light-work-reel-2024.mp4
+Light-Work-Hero-3.mp4
+hero-video.mp4
+
+# R2 upload script (contains credentials)
+r2-upload.js
+package.json
+package-lock.json
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Development
+node_modules/

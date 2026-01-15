@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LightWork</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Transition Overlay -->
+    <div class="transition-overlay"></div>
+
+    <!-- Home Page -->
+    <div class="page" id="home-page">
+        <!-- Navigation -->
+        <nav class="nav">
+            <div class="nav-container">
+                <div class="nav-logo">
+                    <img src="Logo-Alpha-White.png" alt="LightWork Logo">
+                </div>
+                <div class="nav-divider"></div>
+                <div class="nav-desktop">
+                    <button class="nav-icon" data-page="home" title="Home">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                            <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                        </svg>
+                    </button>
+                    <button class="nav-icon" data-page="gallery" title="Gallery">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="3" y="3" width="7" height="7"></rect>
+                            <rect x="14" y="3" width="7" height="7"></rect>
+                            <rect x="14" y="14" width="7" height="7"></rect>
+                            <rect x="3" y="14" width="7" height="7"></rect>
+                        </svg>
+                    </button>
+                    <button class="nav-icon" data-page="about" title="About">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <line x1="12" y1="16" x2="12" y2="12"></line>
+                            <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                        </svg>
+                    </button>
+                    <button class="nav-icon" data-page="contact" title="Contact">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                            <polyline points="22,6 12,13 2,6"></polyline>
+                        </svg>
+                    </button>
+                </div>
+                <div class="nav-mobile">
+                    <button class="hamburger" id="hamburger">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                    <div class="mobile-menu hidden" id="mobile-menu">
+                        <button class="mobile-menu-item" data-page="home">Home</button>
+                        <button class="mobile-menu-item" data-page="gallery">Gallery</button>
+                        <button class="mobile-menu-item" data-page="about">About</button>
+                        <button class="mobile-menu-item" data-page="contact">Contact</button>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Home Section -->
+        <section class="section" id="home-section">
+            <div class="video-container">
+                <video class="hero-video" autoplay muted loop playsinline preload="auto">
+                    <source src="https://pub-456f19304a5c430d8c184ecc68198a3c.r2.dev/hero-video.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <div class="video-loading">Loading video...</div>
+            </div>
+            <div class="copy-section">
+                <div class="copy-content">
+                    <h1 class="main-title fade-in">Visual Language</h1>
+
+                    <div class="copy-text fade-in">
+                        <p>Light Work is a service based company focused on creating the ultimate visual experience for any context. Ranging from two dimensional to three dimensional, stills to animated, interactive to passive, objective to subjective, all our work serves the purpose of excellent visual language. If you are interested in talking with us directly, please use the inquiry form below. Thank you for visiting the site and looking forward to hearing about your ideas.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Filter Section -->
+            <div class="filter-section">
+                <div class="filter-buttons" id="filter-buttons">
+                    <!-- Filter buttons will be dynamically inserted here -->
+                </div>
+            </div>
+
+            <!-- Portfolio Grid -->
+            <div class="portfolio-grid-container">
+                <div class="masonry-grid" id="masonry-grid">
+                    <!-- Gallery items will be dynamically inserted here -->
+                </div>
+            </div>
+
+            <!-- Bottom Buffer Section -->
+            <div class="bottom-buffer"></div>
+        </section>
+
+        <!-- Gallery Section -->
+        <section class="section hidden" id="gallery-section">
+            <div class="section-container">
+                <p style="color: #ccc; text-align: center;">Gallery view - same content as home page</p>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section class="section hidden" id="about-section">
+            <div class="section-container">
+                <div class="content-wrapper">
+                    <h2 class="section-title">About LightWork</h2>
+                    <div class="about-content">
+                        <p>LightWork is a creative studio dedicated to pushing the boundaries of digital art and design. Founded with a vision to illuminate ideas through technology, we craft experiences that captivate and inspire.</p>
+                        <p>Our team combines technical expertise with artistic vision, creating work that spans 3D visualization, interactive media, and immersive experiences.</p>
+                        <p>Every project is an opportunity to explore new possibilities and challenge conventional approaches to digital creativity.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section class="section hidden" id="contact-section">
+            <div class="section-container">
+                <div class="content-wrapper">
+                    <h2 class="section-title">Get In Touch</h2>
+                    <div class="contact-content">
+                        <p class="contact-intro">Ready to collaborate? Let's create something extraordinary together.</p>
+                        <form class="contact-form" id="contact-form">
+                            <input type="text" name="name" placeholder="Name" required>
+                            <input type="email" name="email" placeholder="Email" required>
+                            <textarea name="message" placeholder="Message" rows="6" required></textarea>
+                            <button type="submit" class="submit-btn">Send Message</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
