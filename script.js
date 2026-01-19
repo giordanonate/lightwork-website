@@ -479,6 +479,11 @@ window.addEventListener('load', async () => {
 
     // Load gallery items on home page
     loadGalleryItems();
+
+    // Fade out the transition overlay after page loads
+    setTimeout(() => {
+        transitionOverlay.classList.add('loaded');
+    }, 100);
 });
 
 // Handle browser back button

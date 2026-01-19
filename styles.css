@@ -43,9 +43,9 @@ body.reloading .nav {
 .transition-overlay {
     position: fixed;
     inset: 0;
-    background: white;
-    opacity: 0;
-    pointer-events: none;
+    background: #181818;
+    opacity: 1;
+    pointer-events: all;
     transition: opacity 0.5s ease-in-out;
     z-index: 10000;
 }
@@ -55,8 +55,10 @@ body.reloading .nav {
     pointer-events: all;
 }
 
-.transition-overlay.fade-out {
+.transition-overlay.fade-out,
+.transition-overlay.loaded {
     opacity: 0;
+    pointer-events: none;
 }
 
 /* ===== Page System ===== */
