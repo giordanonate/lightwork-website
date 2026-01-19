@@ -152,127 +152,58 @@ mobileMenuItems.forEach(item => {
 let galleryItems = [];
 let galleryLoaded = false;
 let currentFilter = 'all';
+let portfolioGalleryData = [];
 
-// Portfolio gallery data - all media from Portfolio-Content folder with actual file metadata
-const portfolioGalleryData = [
-    { type: 'image', src: 'Portfolio-Content/Bothead/ANIMATED3.gif', alt: 'Bothead - ANIMATED3', category: 'Bothead', dateModified: '04-26-2022' },
-    { type: 'image', src: 'Portfolio-Content/Bothead/BACKDROPS0010.png', alt: 'Bothead - BACKDROPS0010', category: 'Bothead', dateModified: '05-03-2022' },
-    { type: 'video', src: 'Portfolio-Content/Bothead/Bothead.mp4', alt: 'Bothead - Bothead', category: 'Bothead', dateModified: '07-12-2022' },
-    { type: 'image', src: 'Portfolio-Content/Bothead/CHEESEBOT.png', alt: 'Bothead - CHEESEBOT', category: 'Bothead', dateModified: '04-25-2022' },
-    { type: 'image', src: 'Portfolio-Content/Bothead/newannoucment0012.png', alt: 'Bothead - newannoucment0012', category: 'Bothead', dateModified: '07-22-2022' },
-    { type: 'image', src: 'Portfolio-Content/Bothead/NICE1.png', alt: 'Bothead - NICE1', category: 'Bothead', dateModified: '04-25-2022' },
-    { type: 'image', src: 'Portfolio-Content/Bothead/OG.png', alt: 'Bothead - OG', category: 'Bothead', dateModified: '04-25-2022' },
-    { type: 'image', src: 'Portfolio-Content/Bothead/ONEb.png', alt: 'Bothead - ONEb', category: 'Bothead', dateModified: '06-28-2022' },
-    { type: 'image', src: 'Portfolio-Content/Bothead/PapaMooMoo.png', alt: 'Bothead - PapaMooMoo', category: 'Bothead', dateModified: '09-23-2022' },
-    { type: 'video', src: 'Portfolio-Content/Bothead/Teaser2.mp4', alt: 'Bothead - Teaser2', category: 'Bothead', dateModified: '04-23-2022' },
-    { type: 'image', src: 'Portfolio-Content/Bothead/unknown.png', alt: 'Bothead - unknown', category: 'Bothead', dateModified: '07-09-2022' },
-    { type: 'video', src: 'Portfolio-Content/Degen-Legends/3Dtoken1.mp4', alt: 'Degen-Legends - 3Dtoken1', category: 'Degen-Legends', dateModified: '11-02-2022' },
-    { type: 'video', src: 'Portfolio-Content/Degen-Legends/ArtReveal2.mp4', alt: 'Degen-Legends - ArtReveal2', category: 'Degen-Legends', dateModified: '01-31-2023' },
-    { type: 'image', src: 'Portfolio-Content/Degen-Legends/banner.gif', alt: 'Degen-Legends - banner', category: 'Degen-Legends', dateModified: '02-02-2023' },
-    { type: 'video', src: 'Portfolio-Content/Degen-Legends/BillBoard2.mp4', alt: 'Degen-Legends - BillBoard2', category: 'Degen-Legends', dateModified: '01-13-2023' },
-    { type: 'image', src: 'Portfolio-Content/Degen-Legends/BlackArmorHelmets.png', alt: 'Degen-Legends - BlackArmorHelmets', category: 'Degen-Legends', dateModified: '11-26-2022' },
-    { type: 'video', src: 'Portfolio-Content/Degen-Legends/CityReveal.mp4', alt: 'Degen-Legends - CityReveal', category: 'Degen-Legends', dateModified: '01-19-2023' },
-    { type: 'video', src: 'Portfolio-Content/Degen-Legends/COVER-HAMMER.mp4', alt: 'Degen-Legends - COVER-HAMMER', category: 'Degen-Legends', dateModified: '01-18-2023' },
-    { type: 'video', src: 'Portfolio-Content/Degen-Legends/COVER-HUMANS.mp4', alt: 'Degen-Legends - COVER-HUMANS', category: 'Degen-Legends', dateModified: '01-28-2023' },
-    { type: 'video', src: 'Portfolio-Content/Degen-Legends/FigureTest1.mp4', alt: 'Degen-Legends - FigureTest1', category: 'Degen-Legends', dateModified: '11-13-2022' },
-    { type: 'image', src: 'Portfolio-Content/Degen-Legends/hammersample1.png', alt: 'Degen-Legends - hammersample1', category: 'Degen-Legends', dateModified: '01-23-2023' },
-    { type: 'image', src: 'Portfolio-Content/Degen-Legends/lightning-bolt-animation-3.gif', alt: 'Degen-Legends - lightning-bolt-animation-3', category: 'Degen-Legends', dateModified: '01-31-2023' },
-    { type: 'video', src: 'Portfolio-Content/Degen-Legends/LOGO5.mp4', alt: 'Degen-Legends - LOGO5', category: 'Degen-Legends', dateModified: '02-21-2023' },
-    { type: 'image', src: 'Portfolio-Content/Degen-Legends/MerchAssetsSkull2.gif', alt: 'Degen-Legends - MerchAssetsSkull2', category: 'Degen-Legends', dateModified: '09-29-2022' },
-    { type: 'video', src: 'Portfolio-Content/Degen-Legends/Rotate1.mp4', alt: 'Degen-Legends - Rotate1', category: 'Degen-Legends', dateModified: '01-20-2023' },
-    { type: 'video', src: 'Portfolio-Content/Degen-Legends/ScoreboardAd.mp4', alt: 'Degen-Legends - ScoreboardAd', category: 'Degen-Legends', dateModified: '01-17-2023' },
-    { type: 'video', src: 'Portfolio-Content/Degen-Legends/Skull-Token.mp4', alt: 'Degen-Legends - Skull-Token', category: 'Degen-Legends', dateModified: '02-02-2023' },
-    { type: 'video', src: 'Portfolio-Content/Degen-Legends/SPLASH-ANIMATED-1.mp4', alt: 'Degen-Legends - SPLASH-ANIMATED-1', category: 'Degen-Legends', dateModified: '08-24-2022' },
-    { type: 'image', src: 'Portfolio-Content/Degen-Legends/Tall-Poster (3).png', alt: 'Degen-Legends - Tall-Poster (3)', category: 'Degen-Legends', dateModified: '11-07-2022' },
-    { type: 'image', src: 'Portfolio-Content/Degen-Legends/Twitter-Banner.png', alt: 'Degen-Legends - Twitter-Banner', category: 'Degen-Legends', dateModified: '01-23-2023' },
-    { type: 'image', src: 'Portfolio-Content/G-Money/GMONEY-DESIGNFORFLIP1.png', alt: 'G-Money - GMONEY-DESIGNFORFLIP1', category: 'G-Money', dateModified: '08-17-2022' },
-    { type: 'image', src: 'Portfolio-Content/G-Money/GMONEY-HIGHSNOBIETY-FISHEYE.png', alt: 'G-Money - GMONEY-HIGHSNOBIETY-FISHEYE', category: 'G-Money', dateModified: '08-21-2022' },
-    { type: 'image', src: 'Portfolio-Content/G-Money/GMONEY-HIGHSNOBIETY-SQUARE.png', alt: 'G-Money - GMONEY-HIGHSNOBIETY-SQUARE', category: 'G-Money', dateModified: '08-21-2022' },
-    { type: 'image', src: 'Portfolio-Content/G-Money/GMONEY-HIGHSNOBIETY-TALL.png', alt: 'G-Money - GMONEY-HIGHSNOBIETY-TALL', category: 'G-Money', dateModified: '08-21-2022' },
-    { type: 'video', src: 'Portfolio-Content/G-Money/GMONEY-VAULT-ANIMATED.mp4', alt: 'G-Money - GMONEY-VAULT-ANIMATED', category: 'G-Money', dateModified: '08-22-2022' },
-    { type: 'image', src: 'Portfolio-Content/G-Money/GMONEY10.png', alt: 'G-Money - GMONEY10', category: 'G-Money', dateModified: '08-18-2022' },
-    { type: 'video', src: 'Portfolio-Content/Magic Eden/$ME-Logo-Loop.mp4', alt: 'Magic Eden - $ME-Logo-Loop', category: 'Magic Eden', dateModified: '10-29-2024' },
-    { type: 'video', src: 'Portfolio-Content/Magic Eden/2024-Recap-4.mp4', alt: 'Magic Eden - 2024-Recap-4', category: 'Magic Eden', dateModified: '12-13-2024' },
-    { type: 'video', src: 'Portfolio-Content/Magic Eden/470million-2.mp4', alt: 'Magic Eden - 470million-2', category: 'Magic Eden', dateModified: '12-10-2024' },
-    { type: 'video', src: 'Portfolio-Content/Magic Eden/BTC-Flower-Scene.mp4', alt: 'Magic Eden - BTC-Flower-Scene', category: 'Magic Eden', dateModified: '04-15-2024' },
-    { type: 'video', src: 'Portfolio-Content/Magic Eden/BTC-Runes-Texture-Sample.mp4', alt: 'Magic Eden - BTC-Runes-Texture-Sample', category: 'Magic Eden', dateModified: '04-11-2024' },
-    { type: 'video', src: 'Portfolio-Content/Magic Eden/Creator-Confessions-Vertical.mp4', alt: 'Magic Eden - Creator-Confessions-Vertical', category: 'Magic Eden', dateModified: '04-30-2023' },
-    { type: 'video', src: 'Portfolio-Content/Magic Eden/Distribution-Cube.mp4', alt: 'Magic Eden - Distribution-Cube', category: 'Magic Eden', dateModified: '12-10-2024' },
-    { type: 'video', src: 'Portfolio-Content/Magic Eden/Emmy-Close-Up-1.mp4', alt: 'Magic Eden - Emmy-Close-Up-1', category: 'Magic Eden', dateModified: '03-26-2024' },
-    { type: 'video', src: 'Portfolio-Content/Magic Eden/Emmy-Curtis-Dap-Rough.mp4', alt: 'Magic Eden - Emmy-Curtis-Dap-Rough', category: 'Magic Eden', dateModified: '02-07-2024' },
-    { type: 'video', src: 'Portfolio-Content/Magic Eden/Emmy-Wave-3.mp4', alt: 'Magic Eden - Emmy-Wave-3', category: 'Magic Eden', dateModified: '04-26-2024' },
-    { type: 'video', src: 'Portfolio-Content/Magic Eden/Lucky-Buy-Base-3.mp4', alt: 'Magic Eden - Lucky-Buy-Base-3', category: 'Magic Eden', dateModified: '08-29-2025' },
-    { type: 'video', src: 'Portfolio-Content/Magic Eden/METV-3D-vertical.mp4', alt: 'Magic Eden - METV-3D-vertical', category: 'Magic Eden', dateModified: '05-06-2023' },
-    { type: 'video', src: 'Portfolio-Content/Magic Eden/Runes-Phone.mp4', alt: 'Magic Eden - Runes-Phone', category: 'Magic Eden', dateModified: '01-30-2025' },
-    { type: 'video', src: 'Portfolio-Content/Magic Eden/Season-2-1.mp4', alt: 'Magic Eden - Season-2-1', category: 'Magic Eden', dateModified: '03-24-2025' },
-    { type: 'video', src: 'Portfolio-Content/Magic Eden/Surfing-2.mp4', alt: 'Magic Eden - Surfing-2', category: 'Magic Eden', dateModified: '11-12-2024' },
-    { type: 'video', src: 'Portfolio-Content/Magic Eden/Top-1-Loop.mp4', alt: 'Magic Eden - Top-1-Loop', category: 'Magic Eden', dateModified: '03-29-2025' },
-    { type: 'video', src: 'Portfolio-Content/Magic Eden/Wallet-GA-Token-Claim.mp4', alt: 'Magic Eden - Wallet-GA-Token-Claim', category: 'Magic Eden', dateModified: '08-21-2024' },
-    { type: 'video', src: 'Portfolio-Content/Magic Eden/Yuga-Teaser-V6.mp4', alt: 'Magic Eden - Yuga-Teaser-V6', category: 'Magic Eden', dateModified: '10-27-2023' },
-    { type: 'video', src: 'Portfolio-Content/Mango Markets/loop-de-loop-3.mp4', alt: 'Mango Markets - loop-de-loop-3', category: 'Mango Markets', dateModified: '10-19-2023' },
-    { type: 'video', src: 'Portfolio-Content/Mango Markets/Mango-Island.mp4', alt: 'Mango Markets - Mango-Island', category: 'Mango Markets', dateModified: '12-01-2023' },
-    { type: 'video', src: 'Portfolio-Content/Mango Markets/Mango-Test-1.mp4', alt: 'Mango Markets - Mango-Test-1', category: 'Mango Markets', dateModified: '09-26-2023' },
-    { type: 'video', src: 'Portfolio-Content/Mango Markets/Mango-Test-2.mp4', alt: 'Mango Markets - Mango-Test-2', category: 'Mango Markets', dateModified: '09-27-2023' },
-    { type: 'video', src: 'Portfolio-Content/Outpace/Baggage-3.mp4', alt: 'Outpace - Baggage-3', category: 'Outpace', dateModified: '09-01-2025' },
-    { type: 'video', src: 'Portfolio-Content/Outpace/Baggage-Tall.mp4', alt: 'Outpace - Baggage-Tall', category: 'Outpace', dateModified: '09-02-2025' },
-    { type: 'video', src: 'Portfolio-Content/Outpace/PokeBall-6.mp4', alt: 'Outpace - PokeBall-6', category: 'Outpace', dateModified: '09-30-2025' },
-    { type: 'image', src: 'Portfolio-Content/Riddle/desert-2.png', alt: 'Riddle - desert-2', category: 'Riddle', dateModified: '03-05-2024' },
-    { type: 'image', src: 'Portfolio-Content/Riddle/desert.png', alt: 'Riddle - desert', category: 'Riddle', dateModified: '03-05-2024' },
-    { type: 'image', src: 'Portfolio-Content/Riddle/Floating-Car0021.png', alt: 'Riddle - Floating-Car0021', category: 'Riddle', dateModified: '02-16-2024' },
-    { type: 'video', src: 'Portfolio-Content/Riddle/Prisoners-V3.mp4', alt: 'Riddle - Prisoners-V3', category: 'Riddle', dateModified: '08-21-2024' },
-    { type: 'image', src: 'Portfolio-Content/Riddle/Riddle-Chair-12.png', alt: 'Riddle - Riddle-Chair-12', category: 'Riddle', dateModified: '03-08-2024' },
-    { type: 'video', src: 'Portfolio-Content/Riddle/Riddle-Sherf-1.mp4', alt: 'Riddle - Riddle-Sherf-1', category: 'Riddle', dateModified: '02-17-2024' },
-    { type: 'video', src: 'Portfolio-Content/Riddle/Riddle-Sherf-7.mp4', alt: 'Riddle - Riddle-Sherf-7', category: 'Riddle', dateModified: '03-02-2024' },
-    { type: 'image', src: 'Portfolio-Content/Slingshot/D3-2.png', alt: 'Slingshot - D3-2', category: 'Slingshot', dateModified: '02-14-2025' },
-    { type: 'image', src: 'Portfolio-Content/Slingshot/D3-3.png', alt: 'Slingshot - D3-3', category: 'Slingshot', dateModified: '02-15-2025' },
-    { type: 'image', src: 'Portfolio-Content/Slingshot/D3_0014.png', alt: 'Slingshot - D3_0014', category: 'Slingshot', dateModified: '02-16-2025' },
-    { type: 'image', src: 'Portfolio-Content/Slingshot/D3_0141.png', alt: 'Slingshot - D3_0141', category: 'Slingshot', dateModified: '02-19-2025' },
-    { type: 'image', src: 'Portfolio-Content/Slingshot/Press-1.png', alt: 'Slingshot - Press-1', category: 'Slingshot', dateModified: '04-09-2025' },
-    { type: 'image', src: 'Portfolio-Content/Slingshot/Press-2.png', alt: 'Slingshot - Press-2', category: 'Slingshot', dateModified: '04-09-2025' },
-    { type: 'image', src: 'Portfolio-Content/Slingshot/Press-3.png', alt: 'Slingshot - Press-3', category: 'Slingshot', dateModified: '04-09-2025' },
-    { type: 'image', src: 'Portfolio-Content/Slingshot/Rock-1_0008.png', alt: 'Slingshot - Rock-1_0008', category: 'Slingshot', dateModified: '04-06-2025' },
-    { type: 'image', src: 'Portfolio-Content/Slingshot/Slingshot-Banner-1500x500.png', alt: 'Slingshot - Slingshot-Banner-1500x500', category: 'Slingshot', dateModified: '04-07-2025' },
-    { type: 'video', src: 'Portfolio-Content/Slingshot/Slingshot-Logo-Chrome-Lasers.mp4', alt: 'Slingshot - Slingshot-Logo-Chrome-Lasers', category: 'Slingshot', dateModified: '04-15-2025' },
-    { type: 'image', src: 'Portfolio-Content/Slingshot/Slingshot_Banner_0002.png', alt: 'Slingshot - Slingshot_Banner_0002', category: 'Slingshot', dateModified: '04-05-2025' },
-    { type: 'video', src: 'Portfolio-Content/Slingshot/Slingshot_Website-1.mp4', alt: 'Slingshot - Slingshot_Website-1', category: 'Slingshot', dateModified: '04-11-2025' },
-    { type: 'image', src: 'Portfolio-Content/Slingshot/V1-1_0003.png', alt: 'Slingshot - V1-1_0003', category: 'Slingshot', dateModified: '02-25-2025' },
-    { type: 'image', src: 'Portfolio-Content/Slingshot/V1-1_0004.png', alt: 'Slingshot - V1-1_0004', category: 'Slingshot', dateModified: '02-25-2025' },
-    { type: 'image', src: 'Portfolio-Content/Slingshot/V1-1_0092.png', alt: 'Slingshot - V1-1_0092', category: 'Slingshot', dateModified: '03-12-2025' },
-    { type: 'image', src: 'Portfolio-Content/Slingshot/V1-2_0001.png', alt: 'Slingshot - V1-2_0001', category: 'Slingshot', dateModified: '03-12-2025' },
-    { type: 'image', src: 'Portfolio-Content/Slingshot/V1-2_0113.png', alt: 'Slingshot - V1-2_0113', category: 'Slingshot', dateModified: '03-12-2025' },
-    { type: 'image', src: 'Portfolio-Content/Thunk/3D-21.png', alt: 'Thunk - 3D-21', category: 'Thunk', dateModified: '04-13-2023' },
-    { type: 'image', src: 'Portfolio-Content/Thunk/graffiti-9.png', alt: 'Thunk - graffiti-9', category: 'Thunk', dateModified: '04-13-2023' },
-    { type: 'image', src: 'Portfolio-Content/Thunk/Talking-Businessly.PNG', alt: 'Thunk - Talking-Businessly', category: 'Thunk', dateModified: '08-16-2023' },
-    { type: 'image', src: 'Portfolio-Content/Thunk/Thunk-1.png', alt: 'Thunk - Thunk-1', category: 'Thunk', dateModified: '04-17-2023' },
-    { type: 'image', src: 'Portfolio-Content/Thunk/ThunkSceneV2.png', alt: 'Thunk - ThunkSceneV2', category: 'Thunk', dateModified: '01-11-2026' },
-    { type: 'image', src: 'Portfolio-Content/Thunk/Verbs-2000x2000-Still-Small.png', alt: 'Thunk - Verbs-2000x2000-Still-Small', category: 'Thunk', dateModified: '11-14-2023' },
-    { type: 'video', src: 'Portfolio-Content/Thunk/Verbs-Animated.mp4', alt: 'Thunk - Verbs-Animated', category: 'Thunk', dateModified: '10-25-2023' },
-    { type: 'video', src: 'Portfolio-Content/Thunk/verbs-header-animated.mp4', alt: 'Thunk - verbs-header-animated', category: 'Thunk', dateModified: '11-15-2023' },
-    { type: 'image', src: 'Portfolio-Content/Thunk/verbs-header-still.png', alt: 'Thunk - verbs-header-still', category: 'Thunk', dateModified: '11-15-2023' },
-    { type: 'video', src: 'Portfolio-Content/Zo/Booting-Up-Screen.mp4', alt: 'Zo - Booting-Up-Screen', category: 'Zo', dateModified: '12-05-2025' },
-    { type: 'image', src: 'Portfolio-Content/Zo/Code0000.png', alt: 'Zo - Code0000', category: 'Zo', dateModified: '10-13-2025' },
-    { type: 'image', src: 'Portfolio-Content/Zo/Now-on-Windows.png', alt: 'Zo - Now-on-Windows', category: 'Zo', dateModified: '12-04-2025' },
-    { type: 'image', src: 'Portfolio-Content/Zo/Pixel.png', alt: 'Zo - Pixel', category: 'Zo', dateModified: '12-04-2025' },
-    { type: 'image', src: 'Portfolio-Content/Zo/Shot-3_0031.png', alt: 'Zo - Shot-3_0031', category: 'Zo', dateModified: '09-29-2025' },
-    { type: 'image', src: 'Portfolio-Content/Zo/Zo-Blue.png', alt: 'Zo - Zo-Blue', category: 'Zo', dateModified: '12-07-2025' },
-    { type: 'video', src: 'Portfolio-Content/Zo/Zo-Coin-White.mp4', alt: 'Zo - Zo-Coin-White', category: 'Zo', dateModified: '01-05-2026' },
-    { type: 'video', src: 'Portfolio-Content/Zo/Zo-Light-Dark-Mode-Rough.mp4', alt: 'Zo - Zo-Light-Dark-Mode-Rough', category: 'Zo', dateModified: '10-15-2025' },
-    { type: 'image', src: 'Portfolio-Content/Zo/Zo-Pilled.png', alt: 'Zo - Zo-Pilled', category: 'Zo', dateModified: '12-05-2025' },
-    { type: 'image', src: 'Portfolio-Content/Zo/Zo-Sweater.png', alt: 'Zo - Zo-Sweater', category: 'Zo', dateModified: '12-09-2025' },
-    { type: 'image', src: 'Portfolio-Content/Zo/ZoIcons0033.png', alt: 'Zo - ZoIcons0033', category: 'Zo', dateModified: '10-17-2025' },
-    { type: 'image', src: 'Portfolio-Content/Zo/ZoIcons0034.png', alt: 'Zo - ZoIcons0034', category: 'Zo', dateModified: '10-17-2025' },
-    { type: 'image', src: 'Portfolio-Content/Zo/ZoIcons0093.png', alt: 'Zo - ZoIcons0093', category: 'Zo', dateModified: '10-16-2025' },
-    { type: 'image', src: 'Portfolio-Content/Zo/ZoIcons0094.png', alt: 'Zo - ZoIcons0094', category: 'Zo', dateModified: '10-16-2025' },
-    { type: 'video', src: 'Portfolio-Content/Light Work/Again.mp4', alt: 'Light Work - Again', category: 'Light Work', dateModified: '01-11-2026' },
-    { type: 'video', src: 'Portfolio-Content/Light Work/Being-35-Widescreen.mp4', alt: 'Light Work - Being-35-Widescreen', category: 'Light Work', dateModified: '01-11-2026' },
-    { type: 'video', src: 'Portfolio-Content/Light Work/Being-39.mp4', alt: 'Light Work - Being-39', category: 'Light Work', dateModified: '01-11-2026' },
-    { type: 'video', src: 'Portfolio-Content/Light Work/Breathe.mp4', alt: 'Light Work - Breathe', category: 'Light Work', dateModified: '01-11-2026' },
-    { type: 'video', src: 'Portfolio-Content/Light Work/Crystal-Castles.mp4', alt: 'Light Work - Crystal-Castles', category: 'Light Work', dateModified: '01-11-2026' },
-    { type: 'video', src: 'Portfolio-Content/Light Work/Fairy, she can dance..mp4', alt: 'Light Work - Fairy, she can dance', category: 'Light Work', dateModified: '01-11-2026' },
-    { type: 'video', src: 'Portfolio-Content/Light Work/Fairy.mp4', alt: 'Light Work - Fairy', category: 'Light Work', dateModified: '01-11-2026' },
-    { type: 'video', src: 'Portfolio-Content/Light Work/Flag-is-raised.mp4', alt: 'Light Work - Flag-is-raised', category: 'Light Work', dateModified: '01-11-2026' },
-    { type: 'video', src: 'Portfolio-Content/Light Work/God.mp4', alt: 'Light Work - God', category: 'Light Work', dateModified: '01-11-2026' }
-];
+// Worker URL - UPDATE THIS after deploying your Cloudflare Worker
+const WORKER_URL = 'YOUR_WORKER_URL_HERE';
+
+// Parse URL into gallery item format
+function parseMediaUrl(url) {
+    // Extract path after the R2 base URL
+    const path = url.replace(R2_BASE_URL + '/', '');
+
+    // Only process Portfolio-Content items
+    if (!path.startsWith('Portfolio-Content/')) return null;
+
+    // Extract category (folder name after Portfolio-Content/)
+    const parts = path.replace('Portfolio-Content/', '').split('/');
+    const category = parts[0].replace(/-/g, ' '); // Convert dashes to spaces for display
+    const fileName = decodeURIComponent(parts[parts.length - 1]);
+
+    // Determine type based on extension
+    const isVideo = /\.(mp4|mov)$/i.test(fileName);
+    const type = isVideo ? 'video' : 'image';
+
+    // Create alt text
+    const nameWithoutExt = fileName.replace(/\.[^/.]+$/, '');
+    const alt = `${category} - ${nameWithoutExt}`;
+
+    return {
+        type,
+        src: path,
+        alt,
+        category,
+        url // Keep original URL for direct use
+    };
+}
+
+// Fetch media from Cloudflare Worker
+async function fetchMediaFromWorker() {
+    try {
+        const response = await fetch(WORKER_URL);
+        const urls = await response.json();
+
+        // Parse URLs into gallery data format
+        portfolioGalleryData = urls
+            .map(parseMediaUrl)
+            .filter(item => item !== null);
+
+        return portfolioGalleryData;
+    } catch (error) {
+        console.error('Failed to fetch media from worker:', error);
+        return [];
+    }
+}
 
 function createFilterButtons() {
     const filterButtonsContainer = document.getElementById('filter-buttons');
@@ -301,7 +232,7 @@ function createFilterButtons() {
         // Create logo image element
         const logo = document.createElement('img');
         const logoFileName = category.toLowerCase().replace(/\s+/g, '-');
-        logo.src = `logos/${logoFileName}.svg`;
+        logo.src = `${R2_BASE_URL}/logos/${logoFileName}.svg`;
         logo.alt = category;
         logo.className = 'filter-logo';
 
@@ -406,15 +337,18 @@ function loadGalleryItems() {
         const wrapper = document.createElement('div');
         wrapper.className = 'media-wrapper';
 
+        // Use full URL if available, otherwise construct from src
+        const mediaUrl = item.url || getR2Url(item.src);
+
         if (item.type === 'image') {
             const img = document.createElement('img');
-            img.src = getR2Url(item.src);
+            img.src = mediaUrl;
             img.alt = item.alt;
             img.loading = 'lazy';
             wrapper.appendChild(img);
         } else if (item.type === 'video') {
             const video = document.createElement('video');
-            video.dataset.src = getR2Url(item.src); // Use data-src for lazy loading
+            video.dataset.src = mediaUrl; // Use data-src for lazy loading
             video.loop = true;
             video.muted = true;
             video.playsInline = true;
@@ -432,15 +366,11 @@ function loadGalleryItems() {
 
         const fileName = document.createElement('p');
         fileName.className = 'file-name';
-        fileName.textContent = item.src.split('/').pop();
-
-        const dateModified = document.createElement('p');
-        dateModified.className = 'date-modified';
-        dateModified.textContent = item.dateModified;
+        const srcPath = item.src || item.url.replace(R2_BASE_URL + '/', '');
+        fileName.textContent = decodeURIComponent(srcPath.split('/').pop());
 
         infoOverlay.appendChild(projectName);
         infoOverlay.appendChild(fileName);
-        infoOverlay.appendChild(dateModified);
 
         wrapper.appendChild(infoOverlay);
         masonryItem.appendChild(wrapper);
@@ -531,13 +461,16 @@ if (heroVideo && videoContainer) {
 }
 
 // ===== Initialize =====
-window.addEventListener('load', () => {
+window.addEventListener('load', async () => {
     // Force video to play if it hasn't started
     if (heroVideo) {
         setTimeout(() => {
             heroVideo.play().catch(err => console.log('Delayed play failed:', err));
         }, 1000);
     }
+
+    // Fetch media from worker, then initialize gallery
+    await fetchMediaFromWorker();
 
     // Initialize filter buttons
     createFilterButtons();
