@@ -160,15 +160,17 @@ const WORKER_URL = 'https://lightwork-media.giordanonate.workers.dev/';
 // Parse URL into gallery item format
 function parseMediaUrl(url) {
     // Extract path after the R2 base URL
-    const path = url.replace(R2_BASE_URL + '/', '');
+    const path = decodeURIComponent(url.replace(R2_BASE_URL + '/', ''));
 
-    // Only process Portfolio-Content items
-    if (!path.startsWith('Portfolio-Content/')) return null;
+    // Skip non-media folders (like logos)
+    if (path.startsWith('logos/')) return null;
 
-    // Extract category (folder name after Portfolio-Content/)
-    const parts = path.replace('Portfolio-Content/', '').split('/');
+    // Extract category (first folder in path)
+    const parts = path.split('/');
+    if (parts.length < 2) return null; // Need at least folder/file
+
     const category = parts[0].replace(/-/g, ' '); // Convert dashes to spaces for display
-    const fileName = decodeURIComponent(parts[parts.length - 1]);
+    const fileName = parts[parts.length - 1];
 
     // Determine type based on extension
     const isVideo = /\.(mp4|mov)$/i.test(fileName);
