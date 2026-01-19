@@ -154,8 +154,8 @@ let galleryLoaded = false;
 let currentFilter = 'all';
 let portfolioGalleryData = [];
 
-// Worker URL - UPDATE THIS after deploying your Cloudflare Worker
-const WORKER_URL = 'YOUR_WORKER_URL_HERE';
+// Worker URL for fetching media list from R2 bucket
+const WORKER_URL = 'https://lightwork-media.giordanonate.workers.dev/';
 
 // Parse URL into gallery item format
 function parseMediaUrl(url) {
