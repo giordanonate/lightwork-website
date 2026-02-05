@@ -498,6 +498,18 @@ const heroVideo = document.querySelector('.hero-video');
 const videoContainer = document.querySelector('.video-container');
 
 if (heroVideo && videoContainer) {
+    // Detect mobile and set appropriate video/poster
+    const isMobile = window.innerWidth <= 768;
+
+    if (isMobile) {
+        heroVideo.poster = 'hero-video-mobile-thumbnail.png';
+        const source = heroVideo.querySelector('source');
+        if (source) {
+            source.src = `${R2_BASE_URL}/hero-video-mobile-2.mp4`;
+            heroVideo.load(); // Reload with new source
+        }
+    }
+
     videoContainer.classList.add('loading');
 
     heroVideo.addEventListener('loadeddata', () => {
