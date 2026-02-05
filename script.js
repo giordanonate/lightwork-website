@@ -83,6 +83,24 @@ function switchSection(sectionName) {
     }
 }
 
+// ===== Contact Overlay =====
+const contactOverlay = document.getElementById('contact-overlay');
+
+function toggleContactOverlay() {
+    if (contactOverlay) {
+        contactOverlay.classList.toggle('hidden');
+    }
+}
+
+// Close contact overlay when clicking on the overlay background (not the email link)
+if (contactOverlay) {
+    contactOverlay.addEventListener('click', (e) => {
+        if (e.target === contactOverlay) {
+            contactOverlay.classList.add('hidden');
+        }
+    });
+}
+
 // ===== Desktop Navigation =====
 const navIcons = document.querySelectorAll('.nav-icon');
 navIcons.forEach(icon => {
@@ -91,12 +109,24 @@ navIcons.forEach(icon => {
 
         const destination = icon.dataset.page;
 
+        // Special handling for home button - refresh the page
+        if (destination === 'home') {
+            window.location.reload();
+            return;
+        }
+
         // Special handling for gallery button - scroll to masonry grid
         if (destination === 'gallery') {
             const filterSection = document.querySelector('.filter-section');
             if (filterSection) {
                 filterSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
             }
+            return;
+        }
+
+        // Special handling for contact button - show overlay
+        if (destination === 'contact') {
+            toggleContactOverlay();
             return;
         }
 
@@ -132,12 +162,27 @@ mobileMenuItems.forEach(item => {
 
         const destination = item.dataset.page;
 
+        // Special handling for home button - refresh the page
+        if (destination === 'home') {
+            window.location.reload();
+            return;
+        }
+
         // Special handling for gallery button - scroll to masonry grid
         if (destination === 'gallery') {
             const filterSection = document.querySelector('.filter-section');
             if (filterSection) {
                 filterSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
             }
+            // Close mobile menu
+            mobileMenu.classList.add('hidden');
+            hamburger.classList.remove('active');
+            return;
+        }
+
+        // Special handling for contact button - show overlay
+        if (destination === 'contact') {
+            toggleContactOverlay();
             // Close mobile menu
             mobileMenu.classList.add('hidden');
             hamburger.classList.remove('active');
@@ -392,18 +437,44 @@ function observeElement(element) {
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-
-                // Lazy load video source when it comes into view
                 const video = entry.target.querySelector('video');
-                if (video && video.dataset.src && !video.src) {
-                    video.src = video.dataset.src;
-                    video.load();
-                }
+                const img = entry.target.querySelector('img');
 
-                // Play video when in view (works for both initial load and scroll back)
-                if (video && video.src) {
-                    video.play().catch(err => console.log('Video autoplay failed:', err));
+                // For videos: wait for video to be ready before fading in
+                if (video) {
+                    // Lazy load video source when it comes into view
+                    if (video.dataset.src && !video.src) {
+                        video.src = video.dataset.src;
+                        video.load();
+                    }
+
+                    // Wait for video to have enough data before showing
+                    if (video.readyState >= 2) {
+                        entry.target.classList.add('visible');
+                        video.play().catch(err => console.log('Video autoplay failed:', err));
+                    } else {
+                        video.addEventListener('loadeddata', () => {
+                            entry.target.classList.add('visible');
+                            video.play().catch(err => console.log('Video autoplay failed:', err));
+                        }, { once: true });
+                    }
+                }
+                // For images: wait for image to load before fading in
+                else if (img) {
+                    if (img.complete && img.naturalHeight !== 0) {
+                        entry.target.classList.add('visible');
+                    } else {
+                        img.addEventListener('load', () => {
+                            entry.target.classList.add('visible');
+                        }, { once: true });
+                        // Fallback for cached images
+                        img.addEventListener('error', () => {
+                            entry.target.classList.add('visible');
+                        }, { once: true });
+                    }
+                } else {
+                    // No media, just fade in
+                    entry.target.classList.add('visible');
                 }
             } else {
                 // Pause video when out of view to save resources
@@ -421,26 +492,6 @@ function observeElement(element) {
     observer.observe(element);
 }
 
-// ===== Contact Form =====
-const contactForm = document.getElementById('contact-form');
-if (contactForm) {
-    contactForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-
-        const formData = new FormData(contactForm);
-        const data = {
-            name: formData.get('name'),
-            email: formData.get('email'),
-            message: formData.get('message')
-        };
-
-        // Here you would send to your backend
-        console.log('Form submitted:', data);
-        alert('Thank you for your message! We\'ll get back to you soon.');
-
-        contactForm.reset();
-    });
-}
 
 // ===== Video Handling =====
 const heroVideo = document.querySelector('.hero-video');

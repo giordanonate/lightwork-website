@@ -579,88 +579,38 @@ body.reloading .nav {
     }
 }
 
-/* ===== About & Contact Sections ===== */
-#about-section,
-#contact-section {
-    background-color: #181818;
-}
-
-.content-wrapper {
-    max-width: 800px;
-    margin: 0 auto;
-}
-
-.section-title {
-    font-size: 2.5rem;
-    font-weight: 700;
-    margin-bottom: 3rem;
-    text-align: center;
-    color: #fff;
-}
-
-.about-content p {
-    font-size: 1.1rem;
-    line-height: 1.8;
-    color: #ccc;
-    margin-bottom: 1.5rem;
-}
-
-/* ===== Contact Form ===== */
-.contact-intro {
-    text-align: center;
-    font-size: 1.1rem;
-    color: #ccc;
-    margin-bottom: 2rem;
-}
-
-.contact-form {
+/* ===== Contact Overlay ===== */
+.contact-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     display: flex;
-    flex-direction: column;
-    gap: 1rem;
-}
-
-.contact-form input,
-.contact-form textarea {
-    padding: 1rem;
-    font-family: 'Roboto Mono', monospace;
-    font-size: 1rem;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    transition: border-color 0.3s ease;
-    background-color: #fff;
-}
-
-.contact-form input:focus,
-.contact-form textarea:focus {
-    outline: none;
-    border-color: #333;
-}
-
-.contact-form textarea {
-    resize: vertical;
-    min-height: 150px;
-}
-
-.submit-btn {
-    padding: 1rem 2rem;
-    font-family: 'Roboto Mono', monospace;
-    font-size: 1rem;
-    font-weight: 500;
-    background-color: #333;
-    color: white;
-    border: none;
-    border-radius: 4px;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    opacity: 1;
+    transition: opacity 0.3s ease;
     cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-.submit-btn:hover {
-    background-color: #000;
-    transform: translateY(-2px);
+.contact-overlay.hidden {
+    opacity: 0;
+    pointer-events: none;
 }
 
-.submit-btn:active {
-    transform: translateY(0);
+.contact-email {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 2.5rem;
+    font-weight: 400;
+    color: #fff;
+    text-decoration: none;
+    transition: opacity 0.3s ease;
+}
+
+.contact-email:hover {
+    opacity: 0.7;
 }
 
 /* ===== Responsive Design ===== */
@@ -774,10 +724,14 @@ body.reloading .nav {
         width: 20px;
         height: 20px;
     }
+
+    .contact-email {
+        font-size: 1.5rem;
+    }
 }
 
 /* ===== Utility Classes ===== */
-.hidden {
+.hidden:not(.contact-overlay) {
     display: none !important;
 }
 

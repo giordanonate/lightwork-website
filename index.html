@@ -39,13 +39,6 @@
                             <rect x="3" y="14" width="7" height="7"></rect>
                         </svg>
                     </button>
-                    <button class="nav-icon" data-page="about" title="About">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <circle cx="12" cy="12" r="10"></circle>
-                            <line x1="12" y1="16" x2="12" y2="12"></line>
-                            <line x1="12" y1="8" x2="12.01" y2="8"></line>
-                        </svg>
-                    </button>
                     <button class="nav-icon" data-page="contact" title="Contact">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
@@ -62,7 +55,6 @@
                     <div class="mobile-menu hidden" id="mobile-menu">
                         <button class="mobile-menu-item" data-page="home">Home</button>
                         <button class="mobile-menu-item" data-page="gallery">Gallery</button>
-                        <button class="mobile-menu-item" data-page="about">About</button>
                         <button class="mobile-menu-item" data-page="contact">Contact</button>
                     </div>
                 </div>
@@ -113,37 +105,12 @@
             </div>
         </section>
 
-        <!-- About Section -->
-        <section class="section hidden" id="about-section">
-            <div class="section-container">
-                <div class="content-wrapper">
-                    <h2 class="section-title">About LightWork</h2>
-                    <div class="about-content">
-                        <p>LightWork is a creative studio dedicated to pushing the boundaries of digital art and design. Founded with a vision to illuminate ideas through technology, we craft experiences that captivate and inspire.</p>
-                        <p>Our team combines technical expertise with artistic vision, creating work that spans 3D visualization, interactive media, and immersive experiences.</p>
-                        <p>Every project is an opportunity to explore new possibilities and challenge conventional approaches to digital creativity.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
 
-        <!-- Contact Section -->
-        <section class="section hidden" id="contact-section">
-            <div class="section-container">
-                <div class="content-wrapper">
-                    <h2 class="section-title">Get In Touch</h2>
-                    <div class="contact-content">
-                        <p class="contact-intro">Ready to collaborate? Let's create something extraordinary together.</p>
-                        <form class="contact-form" id="contact-form">
-                            <input type="text" name="name" placeholder="Name" required>
-                            <input type="email" name="email" placeholder="Email" required>
-                            <textarea name="message" placeholder="Message" rows="6" required></textarea>
-                            <button type="submit" class="submit-btn">Send Message</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </section>
+    </div>
+
+    <!-- Contact Overlay -->
+    <div class="contact-overlay hidden" id="contact-overlay">
+        <a href="mailto:nate@lightwork.art" class="contact-email">nate@lightwork.art</a>
     </div>
 
     <script src="script.js"></script>
