@@ -614,6 +614,14 @@ body.reloading .nav {
 }
 
 /* ===== Responsive Design ===== */
+
+/* iPad / Laptop screens */
+@media (min-width: 769px) and (max-width: 1200px) {
+    .copy-section {
+        transform: translateY(-13rem);
+    }
+}
+
 @media (max-width: 768px) {
     .nav {
         padding: 1rem 1.5rem;
