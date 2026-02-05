@@ -631,6 +631,10 @@ body.reloading .nav {
 }
 
 @media (max-width: 768px) {
+    .hero-video {
+        transform: translate(-50%, 100px);
+    }
+
     .nav {
         padding: 1rem 1.5rem;
     }
