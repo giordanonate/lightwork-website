@@ -514,6 +514,22 @@ if (heroVideo && videoContainer) {
 }
 
 // ===== Initialize =====
+
+// Fade overlay when DOM is ready (don't wait for video)
+function fadeOverlay() {
+    setTimeout(() => {
+        transitionOverlay.classList.add('loaded');
+    }, 500);
+}
+
+// Check if DOM already loaded (script is at end of body, so it likely has)
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', fadeOverlay);
+} else {
+    fadeOverlay();
+}
+
+// Load gallery and handle video after page resources available
 window.addEventListener('load', async () => {
     // Force video to play if it hasn't started
     if (heroVideo) {
@@ -530,11 +546,6 @@ window.addEventListener('load', async () => {
 
     // Load gallery items on home page
     loadGalleryItems();
-
-    // Fade out the transition overlay after page loads
-    setTimeout(() => {
-        transitionOverlay.classList.add('loaded');
-    }, 100);
 });
 
 // Handle browser back button
