@@ -627,7 +627,7 @@ body.reloading .nav {
 
 @media (max-width: 768px) {
     .hero-video {
-        transform: translate(-50%, -20%);
+        transform: translate(-50%, 0%);
     }
 
     .nav {
