@@ -283,6 +283,11 @@ function createFilterButtons() {
         logo.alt = category;
         logo.className = 'filter-logo';
 
+        // Fade in when logo loads
+        logo.onload = () => {
+            logo.classList.add('loaded');
+        };
+
         // Add error handler to fall back to text if logo doesn't exist
         logo.onerror = () => {
             logo.style.display = 'none';
@@ -312,9 +317,15 @@ function createFilterButtons() {
     const duplicateSet = firstSet.cloneNode(true);
     duplicateSet.className = 'filter-buttons-set duplicate';
 
-    // Re-attach event listeners to duplicate buttons
+    // Re-attach event listeners and logo handlers to duplicate buttons
     const duplicateButtons = duplicateSet.querySelectorAll('.filter-btn');
     duplicateButtons.forEach((button, index) => {
+        // Re-attach logo onload handler (cloning doesn't copy event handlers)
+        const logo = button.querySelector('.filter-logo');
+        if (logo) {
+            logo.onload = () => logo.classList.add('loaded');
+        }
+
         button.addEventListener('click', (e) => {
             const category = button.dataset.filter;
 

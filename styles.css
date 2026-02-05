@@ -438,7 +438,12 @@ body.reloading .nav {
     width: auto;
     object-fit: contain;
     filter: brightness(0) saturate(100%) invert(23%) sepia(0%) saturate(0%) hue-rotate(180deg) brightness(95%) contrast(88%);
-    transition: filter 0.3s ease;
+    opacity: 0;
+    transition: filter 0.3s ease, opacity 0.4s ease;
+}
+
+.filter-logo.loaded {
+    opacity: 1;
 }
 
 .filter-btn:hover .filter-logo {
